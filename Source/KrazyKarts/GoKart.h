@@ -31,7 +31,8 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
-	FVector GetResistance();
+	FVector GetAirResistance();
+	FVector GetRollingResistance();
 
 	// 자동차의 질량 (kg)
 	UPROPERTY(EditAnywhere)
@@ -47,6 +48,10 @@ private:
 	// 높을수력 더 많은 항력
 	UPROPERTY(EditAnywhere)
 		float DragCoefficient = 16;
+
+	// 높을수력 더 많은 구름 항력
+	UPROPERTY(EditAnywhere)
+		float RollingResistanceCoefficient = 0.015f;
 
 	void UpdateLocationFromVelocity(float DeltaTime);
 
