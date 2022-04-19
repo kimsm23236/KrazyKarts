@@ -23,6 +23,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void ApplyRotation(float DeltaTime);
+
 	
 
 	// Called to bind functionality to input
@@ -37,12 +39,16 @@ private:
 	UPROPERTY(EditAnywhere)
 		float MaxDrivingForce = 10000;
 
+	UPROPERTY(EditAnywhere)
+		float MaxDegreesPerSecond = 90;
+
 	void UpdateLocationFromVelocity(float DeltaTime);
 
 	void MoveForward(float Value);
+	void MoveRight(float Value);
 
 	FVector Velocity;
 
 	float Throttle;
-
+	float SteeringThrow;
 };
