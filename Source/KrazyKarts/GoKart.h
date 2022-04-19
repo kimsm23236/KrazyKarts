@@ -23,6 +23,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	
+
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
@@ -34,6 +36,8 @@ private:
 	// 스로틀이 완전히 내려갔을 때 차에 가해지는 힘
 	UPROPERTY(EditAnywhere)
 		float MaxDrivingForce = 10000;
+
+	void UpdateLocationFromVelocity(float DeltaTime);
 
 	void MoveForward(float Value);
 
