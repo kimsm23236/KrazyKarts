@@ -31,6 +31,8 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
+	FVector GetResistance();
+
 	// 자동차의 질량 (kg)
 	UPROPERTY(EditAnywhere)
 		float Mass = 1000;
@@ -41,6 +43,10 @@ private:
 
 	UPROPERTY(EditAnywhere)
 		float MaxDegreesPerSecond = 90;
+
+	// 높을수력 더 많은 항력
+	UPROPERTY(EditAnywhere)
+		float DragCoefficient = 16;
 
 	void UpdateLocationFromVelocity(float DeltaTime);
 
