@@ -55,7 +55,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void ApplyRotation(float DeltaTime);
+	void ApplyRotation(float DeltaTime, float steeringThrow);
 
 	
 
@@ -63,6 +63,11 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
+	void SimulateMove(FGoKartMove Move);
+
+	FGoKartMove CreateMove(float DeltaTime);
+	void ClearAcknowledgedMoves(FGoKartMove LastMove);
+
 	FVector GetAirResistance();
 	FVector GetRollingResistance();
 
@@ -94,22 +99,18 @@ private:
 
 
 	UFUNCTION(Server, Reliable, WithValidation)
-		void Server_MoveForward(float Value);
-	
-	UFUNCTION(Server, Reliable, WithValidation)
-		void Server_MoveRight(float Value);
+		void Server_SendMove(FGoKartMove Move);
 
-	UPROPERTY(Replicated)
-		FVector Velocity;
+	UPROPERTY(ReplicatedUsing = OnRep_ServerState)
+		FGoKartState ServerState;
 
-	UPROPERTY(ReplicatedUsing = OnRep_ReplicatedTransform)
-		FTransform ReplicatedTransform;
+	FVector Velocity;
 
 	UFUNCTION()
-		void OnRep_ReplicatedTransform();
+		void OnRep_ServerState();
 
-	UPROPERTY(Replicated)
-		float Throttle;
-	UPROPERTY(Replicated)
-		float SteeringThrow;
+	float Throttle;
+	float SteeringThrow;
+
+	TArray<FGoKartMove> UnacknowledgedMoves;
 };
