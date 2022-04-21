@@ -54,6 +54,9 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	UFUNCTION(BlueprintCallable)
+		void SetMeshOffsetRoot(USceneComponent* Root) { MeshOffsetRoot = Root; }
+
 private:	
 	void ClearAcknowledgedMoves(FGoKartMove LastMove);
 
@@ -90,4 +93,7 @@ private:
 
 	UPROPERTY()
 		UGoKartMovementComponent* MovementComponent;
+
+	UPROPERTY()
+		USceneComponent* MeshOffsetRoot;
 };
