@@ -58,10 +58,10 @@ private:
 
 	FGoKartMove CreateMove(float DeltaTime);
 
-	void ApplyRotation(float DeltaTime, float steeringThrow);
-
 	FVector GetAirResistance();
 	FVector GetRollingResistance();
+
+	void ApplyRotation(float DeltaTime, float steeringThrow);
 
 	void UpdateLocationFromVelocity(float DeltaTime);
 
